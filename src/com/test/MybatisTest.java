@@ -2,6 +2,7 @@ package com.test;
 
 import java.util.List;
 
+import com.service.CategoryService;
 import com.util.Page;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 //import org.springframework.webapp.*;
 import com.mapper.CategoryMapper;
 import com.pojo.Category;
+import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration("classpath:/springMVC.xml")
@@ -20,14 +22,23 @@ public class MybatisTest {
     @Autowired
     private CategoryMapper categoryMapper;
 
+    @Autowired
+    private CategoryService categoryService;
+
+//    @Test
+//    public void testAdd() {
+//      for(int i =0;i<100;i++){
+//      Category category = new Category();
+//      category.setName("new Category");
+//      categoryMapper.add(category);
+//    }
+//
+//    }
+
     @Test
-    public void testAdd() {
-      for(int i =0;i<100;i++){
-      Category category = new Category();    
-      category.setName("new Category");
-      categoryMapper.add(category);
-    }
-       
+    public void testAOP(){
+     categoryService.deleteAll();
+    // categoryService.addTwo();
     }
 
 //    @Test

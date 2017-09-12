@@ -23,5 +23,9 @@ public interface CategoryService {
 
     Category get(int id);
 
+    void addTwo();
+
+    void deleteAll();
+
 
 }
