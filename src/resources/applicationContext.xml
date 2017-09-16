@@ -14,6 +14,7 @@
 
     <context:annotation-config />
     <context:component-scan base-package="com.service" />
+      <!-- 使用Druid连接池 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <!-- 基本属性 url、user、password -->
         <property name="url" value="jdbc:mysql://localhost:3306/how2java?characterEncoding=UTF-8" />
@@ -44,6 +45,8 @@
         <property name="poolPreparedStatements" value="true" />
         <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
     </bean>
+
+     <!--只使用jdbc连接-->
     <!--<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
         <!--<property name="driverClassName">-->
             <!--<value>com.mysql.jdbc.Driver</value>-->
@@ -60,6 +63,8 @@
         <!--</property>-->
     <!--</bean>-->
 
+
+    <!--注册sqlsession工厂类-->
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="typeAliasesPackage" value="com.pojo" />
         <property name="dataSource" ref="dataSource"/>
@@ -76,11 +81,11 @@
             </array>
         </property>
     </bean>
-
+    <!--Mybatis映射扫描器-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.mapper"/>
     </bean>
-
+    <!--开启AOP与事务管理并对操作进行区分-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
     </bean>
